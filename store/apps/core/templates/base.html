@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %} | Ecommerce</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+  </head>
+  <body>
+    <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="{% url 'frontPage' %}">
+                <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+            </a>
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+                <a href="{% url 'frontPage' %}" class="navbar-item">
+                Home
+                </a>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                        Product Categories
+                    </a>
+                    <div class="navbar-dropdown">
+                        {% for category in menu_categories %}
+                            <a href="{% url 'category_detail' category.slug %}" class="navbar-item">
+                                {{ category.title }}
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <a class="button is-primary">
+                            <strong>Sign up</strong>
+                        </a>
+                        <a class="button is-light">
+                            Log in
+                        </a>
+                        <a href="{% url 'cartPage' %}" class="button is-primary">
+                            <!-- <span class="icon">
+                                <i class="fas fa-home"></i>
+                            </span> -->
+                            Cart
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </nav>
+
+    <section class="section">
+        {% block content %}
+        {% endblock %}
+    </section>
+
+    <footer class="footer">
+        <div class="columns">
+            <div class="column is-4">
+                <h2 class="subtitle">Bulma</h2>
+            </div>
+            <div class="column is-8">
+                <a href="{% url 'contactPage' %}" class="navbar-item">Contact</a>
+                <a href="{% url 'aboutPage' %}" class="navbar-item">About</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    {% block scripts %}
+    {% endblock %}
+  </body>
+</html>
