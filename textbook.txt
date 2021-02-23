@@ -1,1 +1,7 @@
 # admin id pass: username:admin password:abc123
+
+------git code update commands------
+git add .
+git commit -m "second commit"
+git push -u origin main
+git status

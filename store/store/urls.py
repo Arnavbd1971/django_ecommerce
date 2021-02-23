@@ -42,6 +42,7 @@ urlpatterns = [
 
     # stores api urls start
     path('api/add_to_cart/', api_add_to_cart, name="api_add_to_cart"),
+    path('api/remove_from_cart/', api_remove_from_cart, name="api_remove_from_cart"),
     # stores api urls end
 
     # admin urls start

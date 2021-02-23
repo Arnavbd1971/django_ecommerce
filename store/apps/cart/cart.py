@@ -1,9 +1,10 @@
 from django.conf import settings
+from apps.stores.models import Product
 
 class Cart(object):
     def __init__(self, request):
         self.session = request.session
-        cart = self.session.get(settings.SESSION_COOKIE_AGE)
+        cart = self.session.get(settings.CART_SESSION_ID)
 
         if not cart:
             cart = self.session[settings.CART_SESSION_ID] = {}
@@ -40,6 +41,11 @@ class Cart(object):
             self.cart[product_id]["quantity"] = self.cart[product_id]["quantity"] + 1
 
         self.save()
+
+    def remove(self, product_id):
+        if product_id in self.cart:
+            del self.cart[product_id]
+            self.save()
 
     def save(self):
         self.session[settings.CART_SESSION_ID] = self.cart
