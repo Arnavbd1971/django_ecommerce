@@ -19,7 +19,8 @@
 <script>
     var productapp = new Vue({
         el: "#productapp",
-        delimeters: ['[[', ']]'],
+        delimiters: ['[[', ']]'],
+        store: store,
         data(){
             return {
 
@@ -53,6 +54,7 @@
                     } else{
                         console.log('Added To cart');
                         console.log(result);
+                        store.commit('increment', 1);
                     }
                     // return result;
                 })

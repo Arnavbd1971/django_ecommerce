@@ -1,6 +1,7 @@
 from django.conf import settings
 from apps.stores.models import Product
 
+
 class Cart(object):
     def __init__(self, request):
         self.session = request.session
@@ -50,3 +51,6 @@ class Cart(object):
     def save(self):
         self.session[settings.CART_SESSION_ID] = self.cart
         self.session.modified = True
+
+    def get_total_length(self):
+        return sum(int(item['quantity']) for item in self.cart.values())
